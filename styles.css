@@ -1,0 +1,846 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Changed to auto so JS animation is immediate */
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+/* ===== Background Video ===== */
+.bg-video-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Scroll Track & Sticky Frame ===== */
+.scroll-track {
+  position: relative;
+  z-index: 1;
+  height: 300vh; /* Determines how long the scroll lasts */
+}
+
+.sticky-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.logo {
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 10;
+  will-change: opacity;
+}
+
+.logo img {
+  display: block;
+}
+
+/* ===== Sections Overlapping ===== */
+.section-hero,
+.section-definition {
+  position: absolute;
+  top: 146px; /* Offset to sit below logo + margin (40+26+80 = 146) */
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none; /* Let clicks pass through except for interactive elements */
+}
+
+.section-hero {
+  z-index: 2;
+}
+
+.section-definition {
+  z-index: 1;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: auto; /* Re-enable clicks for hero */
+  will-change: transform, opacity;
+}
+
+.hero-content.visible {
+  opacity: 1;
+}
+
+.hero-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: #D05526;
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 25px;
+  letter-spacing: -0.5px;
+}
+
+.hero-title .bold {
+  font-weight: 700;
+}
+
+/* ===== Waitlist Button / Form ===== */
+.waitlist-wrap {
+  margin-bottom: 32px;
+  position: relative;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-waitlist {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #D05526;
+  background: transparent;
+  border: 1px solid #D05526;
+  border-radius: 12px;
+  padding: 8px 24px;
+  line-height: 82%;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.btn-waitlist:hover {
+  background: #D05526;
+  color: #ffffff;
+}
+
+.btn-waitlist.hiding {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.waitlist-form {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #D05526;
+  border-radius: 12px;
+  padding: 4px 4px 4px 16px;
+  width: 320px;
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.waitlist-form.visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+}
+
+.waitlist-form.hidden {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+.waitlist-form input {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  border: none;
+  outline: none;
+  flex: 1;
+  color: #1a1a1a;
+  background: transparent;
+}
+
+.waitlist-form input::placeholder {
+  color: #aaa;
+}
+
+.btn-submit {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #D05526;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.btn-submit:hover {
+  background: #b84920;
+}
+
+/* ===== Video Box ===== */
+.video-box {
+  width: 660px;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid #D05526;
+  will-change: transform, opacity;
+}
+
+.video-box-inner {
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  border-radius: 18px;
+}
+
+/* ===== Section Definition ===== */
+.definition-content {
+  text-align: center;
+  margin-top: -20px; /* Adjusted to sit right below logo just like hero content */
+  margin-bottom: 32px;
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: transform, opacity;
+  width: 446px; /* Matching Figma */
+}
+
+.definition-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #D05526;
+  margin-bottom: 0px;
+  display: block; /* Force top line */
+  line-height: 1.2;
+}
+
+.definition-sub {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal; /* Removed italic per reference image */
+  color: #D05526;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+/* ===== Mobile Hand ===== */
+.mobile-hand {
+  opacity: 0;
+  transform: translateY(200px);
+  will-change: transform, opacity;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: -32px;
+}
+
+.mobile-hand img {
+  height: 80vh; /* Making it much bigger to match reference */
+  max-height: 850px; /* Increased max height */
+  width: auto;
+  display: block;
+  object-fit: contain;
+  margin-top: 0;
+}
+
+/* ===== Section Imagine ===== */
+.section-imagine {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  background: #ffffff; /* Blocks out the background video from previous section */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 20px;
+}
+
+.imagine-grid {
+  display: flex;
+  gap: 16px;
+  max-width: 863px; /* Frame 37 width */
+  width: 100%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.imagine-grid.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.imagine-col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 375px; /* Left frame width */
+}
+
+.imagine-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 472px; /* Right frame width */
+}
+
+.imagine-title-top {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px; /* Estimated from image weight */
+  font-weight: 700;
+  color: #D05526;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  height: 40px; /* Matching Figma */
+}
+
+.imagine-desc-bottom {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px; /* Estimated from image weight */
+  font-weight: 500;
+  color: #D05526;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+  height: 100px; /* Matching Figma */
+}
+
+.imagine-video-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #E6E6E6; /* Light gray border for videos */
+  background: #fdfdfd;
+}
+
+.imagine-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.04); /* Slight scale to crop out any black borders from the video files */
+}
+
+.imagine-video-wrap.main-video {
+  height: 435px;
+  border-radius: 32px;
+}
+
+.imagine-video-wrap.side-video {
+  height: 305px;
+  border-radius: 16px;
+}
+
+/* ===== Section Built to Be ===== */
+.section-built {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Removed padding for full bleed */
+  overflow: hidden;
+}
+
+.built-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%; /* Allow full width */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+  position: relative; /* For absolute positioning of title */
+}
+
+.built-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.built-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  font-weight: 600; /* SemiBold */
+  color: #D05526;
+  text-align: center;
+  line-height: 0.98; /* 98% */
+  letter-spacing: -0.08em; /* -8% */
+  margin-bottom: 0;
+  position: absolute;
+  top: calc(15% - 128px); /* Moved up another 64px from previous position */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 100%;
+}
+
+.built-image-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.built-image-wrap img {
+  width: 75%; /* Made image 25% bigger (was 50%) */
+  min-width: unset; /* Removed min-width so it can actually scale down */
+  max-width: 1800px; /* Increased max width to accommodate the 75% size on large screens */
+  height: auto;
+  display: block;
+}
+
+/* ===== Section How It Works ===== */
+.section-how {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  padding: 0 20px 160px;
+  margin-top: -100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.how-pill {
+  font-family: 'Poppins', sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: #D05526;
+  border: 1px solid #A1A1A1;
+  border-radius: 42px;
+  width: 261px;
+  height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 80px;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.how-pill .bold {
+  font-weight: 700;
+  letter-spacing: -1.5px;
+}
+
+.how-pill.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.how-part {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin-bottom: 0;
+  display: block;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.how-part.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.how-text h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  color: #D05526;
+  letter-spacing: -0.08em; /* -8% letter spacing */
+  line-height: 0.95; /* Tighter line height to match Figma */
+  margin-bottom: 18px;
+}
+
+.how-text p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 500; /* Medium weight */
+  color: rgba(94, 94, 94, 0.73); /* Gray at 73% opacity matching Figma */
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* Part 1: Sound */
+.part-sound {
+  margin-bottom: -150px; /* Pull mountain up to overlap sound wave */
+}
+
+.text-sound {
+  position: absolute;
+  top: -10%;
+  left: calc(20% - 64px);
+  z-index: 2;
+  max-width: 424px; /* Matching Figma title width */
+}
+
+.text-sound h3 {
+  margin-bottom: 16px; /* Tighten gap between title and description */
+}
+
+.text-sound p {
+  max-width: 342px; /* Exact Figma width: 342x45 Hug */
+}
+
+.img-sound {
+  width: 120%; /* Let it bleed off edges */
+  margin-left: -10%;
+  position: relative;
+  z-index: 1;
+}
+
+.img-sound img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Part 2: Data */
+.part-data {
+  margin-bottom: -150px; /* Pull connections up under mountain */
+}
+
+.text-data {
+  position: absolute;
+  top: 15%;
+  right: calc(5% + 32px);
+  z-index: 3;
+  max-width: 370px; /* Figma: 370 Hug */
+}
+
+.text-data h3 {
+  text-align: left;
+}
+
+.text-data p {
+  max-width: 370px;
+  text-align: left;
+}
+
+.img-data {
+  width: 110%;
+  margin-left: -5%;
+  position: relative;
+  z-index: 2;
+}
+
+.img-data img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Part 3: Connections */
+.part-connections {
+  margin-top: -64px;
+}
+
+.text-connections {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  max-width: 583px; /* Figma: 583x111 */
+  width: 583px;
+}
+
+.text-connections h3 {
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.text-connections p {
+  text-align: left; /* Left aligned per reference */
+  max-width: 307px;
+  margin-left: auto; /* Push description to the right side */
+}
+
+.img-connections {
+  width: 110%; /* Scaled up 10% */
+  margin-left: -5%;
+  position: relative;
+  z-index: 1;
+}
+
+.img-connections img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== Section Features ===== */
+.section-features {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  padding: 0;
+}
+
+.features-wrap {
+  position: relative;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.features-wrap.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.features-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.feature-card {
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.32);
+  border-radius: 24px;
+  padding: 12px;
+  width: 324px;
+  z-index: 2;
+}
+
+.feature-card h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #D05526;
+  letter-spacing: -0.08em;
+  line-height: 25px;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(94, 94, 94, 0.73);
+  line-height: 1.3;
+  max-width: 300px;
+}
+
+.card-security {
+  top: calc(8% - 160px);
+  right: 25%;
+}
+
+.card-context {
+  top: calc(22% - 136px);
+  left: calc(15% + 24px);
+}
+
+.card-medium {
+  top: calc(45% - 136px);
+  right: calc(20% + 32px);
+}
+
+.card-honest {
+  top: calc(58% - 200px);
+  left: calc(18% + 16px);
+}
+
+/* CTA overlay at bottom of the same image */
+.cta-overlay {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.cta-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #D05526;
+  letter-spacing: -0.08em;
+  line-height: 1;
+  margin-bottom: 20px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cta-light {
+  font-weight: 400;
+}
+
+.btn-cta-waitlist {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #D05526;
+  background: transparent;
+  border: 1px solid #D05526;
+  border-radius: 12px;
+  padding: 8px 24px;
+  line-height: 82%;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cta-waitlist:hover {
+  background: #D05526;
+  color: #ffffff;
+}
+
+.btn-cta-waitlist.hiding {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.cta-waitlist-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+
+/* ===== Footer ===== */
+.site-footer {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  padding-top: 100px;
+  padding-bottom: 40px;
+}
+
+.footer-inner {
+  max-width: 1217px;
+  margin: 0 auto;
+  padding: 0 24px;
+  border: 1px solid #D05526;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo img {
+  width: 72px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #737373;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #D05526;
+}
+
+/* ===== Submitted state ===== */
+.waitlist-form .success-msg {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  color: #D05526;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 720px) {
+  .video-box {
+    width: 90vw;
+    height: 60vw;
+  }
+
+  .hero-title {
+    font-size: 15px;
+    padding: 0 20px;
+  }
+
+  .waitlist-form {
+    width: 260px;
+  }
+
+  .definition-title {
+    font-size: 36px;
+  }
+
+  .definition-sub {
+    font-size: 15px;
+    padding: 0 20px;
+  }
+
+  .mobile-hand img {
+    max-height: 420px;
+  }
+}

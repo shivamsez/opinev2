@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opine — Speak to your entire life, in context</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background video -->
+  <div class="bg-video-wrap">
+    <video id="bgVideo" autoplay muted loop playsinline>
+      <source src="Assets/Landing/Landing.webm" type="video/webm">
+    </video>
+  </div>
+
+  <main class="scroll-track" id="scrollTrack">
+    <div class="sticky-frame">
+      
+      <!-- Shared Logo -->
+      <div class="logo" id="mainLogo">
+        <img src="Assets/Landing/logo.png" alt="Opine" width="94" height="26">
+      </div>
+
+      <!-- Section 1: Hero -->
+      <section class="section-hero" id="sectionHero">
+        <div class="hero-content" id="heroContent">
+          <h1 class="hero-title" id="heroTitle">
+            speak to your entire <span class="bold">life&rsquo;s context</span>
+          </h1>
+
+          <div class="waitlist-wrap" id="waitlistWrap">
+            <button class="btn-waitlist" id="btnWaitlist">join waitlist</button>
+            <form class="waitlist-form hidden" id="waitlistForm">
+              <input type="email" placeholder="enter your email" required id="waitlistInput">
+              <button type="submit" class="btn-submit">→</button>
+            </form>
+          </div>
+
+          <div class="video-box" id="videoBox">
+            <div class="video-box-inner">
+              <!-- Temp video placeholder -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Definition -->
+      <section class="section-definition" id="sectionDefinition">
+        <div class="definition-content" id="definitionContent">
+          <span class="definition-title">opine</span>
+          <span class="definition-sub">/ōˈpīn/ — "to express, state, or hold an opinion"</span>
+        </div>
+
+        <div class="mobile-hand" id="mobileHand">
+          <img src="Assets/Landing/mobilehand.png" alt="Opine mobile app">
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Section 3: Imagine -->
+  <section class="section-imagine" id="sectionImagine">
+    <div class="imagine-grid">
+      <!-- Left Column -->
+      <div class="imagine-col-left">
+        <h3 class="imagine-title-top">Imagine a conversation where you didn't have to explain yourself.</h3>
+        
+        <div class="imagine-video-wrap main-video">
+          <video autoplay muted loop playsinline>
+            <source src="Assets/Breakdown/context.webm" type="video/webm">
+          </video>
+        </div>
+
+        <p class="imagine-desc-bottom">Where the person across from you already knew your patterns, your fears, and the threads connecting your past decisions to the one you're making right now.</p>
+      </div>
+
+      <!-- Right Column -->
+      <div class="imagine-col-right">
+        <div class="imagine-video-wrap side-video">
+          <video autoplay muted loop playsinline>
+            <source src="Assets/Breakdown/person02.webm" type="video/webm">
+          </video>
+        </div>
+        
+        <div class="imagine-video-wrap side-video">
+          <video autoplay muted loop playsinline>
+            <source src="Assets/Breakdown/person1.webm" type="video/webm">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Built to Be -->
+  <section class="section-built" id="sectionBuilt">
+    <div class="built-content">
+      <h2 class="built-title">That's what Opine is built to be.</h2>
+      <div class="built-image-wrap">
+        <img src="Assets/Images/contextv2.png" alt="Context representation">
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: How It Works -->
+  <section class="section-how" id="sectionHow">
+    <div class="how-pill">how <span class="bold">Opine</span> works</div>
+
+    <!-- Part 1: Sound Input -->
+    <div class="how-part part-sound">
+      <div class="how-text text-sound">
+        <h3>speak your life</h3>
+        <p>Say everything. Opine listens, captures it all, and connects it to everything you've said before.</p>
+      </div>
+      <div class="how-img img-sound">
+        <img src="Assets/Images/soundinput.png" alt="Sound wave visualization">
+      </div>
+    </div>
+
+    <!-- Part 2: Data Mountain -->
+    <div class="how-part part-data">
+      <div class="how-img img-data">
+        <img src="Assets/Images/data.png" alt="Data mountain visualization">
+      </div>
+      <div class="how-text text-data">
+        <h3>your context mapped</h3>
+        <p>As you speak, Opine builds a living portrait of your world, relationships, patterns, goals, growing richer every time you return.</p>
+      </div>
+    </div>
+
+    <!-- Part 3: Connections -->
+    <div class="how-part part-connections">
+      <div class="how-img img-connections">
+        <!-- Assuming the third image is connections.png based on previous file list -->
+        <img src="Assets/Images/connections.png" alt="Nodes connecting representation">
+      </div>
+      <div class="how-text text-connections">
+        <h3>navigate whats next</h3>
+        <p>Facing a decision? Opine draws on your complete story to offer guidance that's actually yours.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Section 6: Features + CTA -->
+  <section class="section-features" id="sectionFeatures">
+    <div class="features-wrap">
+      <img src="Assets/Images/footerfeatures.png" alt="Features visualization" class="features-img">
+
+      <div class="feature-card card-security">
+        <h4>actual security</h4>
+        <p>Encrypted end-to-end. We can't read your data. We won't sell it.</p>
+      </div>
+
+      <div class="feature-card card-context">
+        <h4>automatic context</h4>
+        <p>Learns the full context of your life without you lifting a finger.</p>
+      </div>
+
+      <div class="feature-card card-medium">
+        <h4>any medium</h4>
+        <p>Sync across all devices. Drop anything into your Opine.</p>
+      </div>
+
+      <div class="feature-card card-honest">
+        <h4>most honest</h4>
+        <p>AI models ranked for the lowest hallucination and bias available.</p>
+      </div>
+
+      <div class="cta-overlay">
+        <h2 class="cta-title"><span class="cta-light">find your</span> Opine</h2>
+        <div class="cta-waitlist-wrap">
+          <button class="btn-cta-waitlist" id="btnCtaWaitlist">join waitlist</button>
+          <form class="waitlist-form hidden" id="ctaWaitlistForm">
+            <input type="email" placeholder="enter your email" required id="ctaWaitlistInput">
+            <button type="submit" class="btn-submit">→</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="Assets/Landing/logo.png" alt="Opine" width="72" height="20">
+      </div>
+      <nav class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Roles</a>
+        <a href="#">IG</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
