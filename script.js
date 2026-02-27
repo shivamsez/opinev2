@@ -103,6 +103,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ===== Smooth Scroll (lerp-based) =====
+  let smoothTarget = window.scrollY;
+  let smoothCurrent = window.scrollY;
+  const smoothEase = 0.075;
+  let smoothRafRunning = false;
+  let wheelActive = false;
+  let wheelTimer = null;
+
+  function getMaxScroll() {
+    return document.body.scrollHeight - window.innerHeight;
+  }
+
+  window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+
+    if (!wheelActive) {
+      smoothCurrent = window.scrollY;
+      smoothTarget = window.scrollY;
+    }
+
+    wheelActive = true;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(() => { wheelActive = false; }, 600);
+
+    smoothTarget += e.deltaY;
+    smoothTarget = Math.max(0, Math.min(smoothTarget, getMaxScroll()));
+
+    if (!smoothRafRunning) {
+      smoothRafRunning = true;
+      requestAnimationFrame(smoothTick);
+    }
+  }, { passive: false });
+
+  function smoothTick() {
+    smoothCurrent += (smoothTarget - smoothCurrent) * smoothEase;
+
+    if (Math.abs(smoothCurrent - smoothTarget) < 0.5) {
+      smoothCurrent = smoothTarget;
+      window.scrollTo(0, smoothCurrent);
+      smoothRafRunning = false;
+      return;
+    }
+
+    window.scrollTo(0, smoothCurrent);
+    requestAnimationFrame(smoothTick);
+  }
+
   // Scroll-driven animations
   let ticking = false;
 

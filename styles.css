@@ -5,7 +5,8 @@
 }
 
 html {
-  scroll-behavior: auto; /* Changed to auto so JS animation is immediate */
+  scroll-behavior: auto;
+  overscroll-behavior: none;
 }
 
 body {
