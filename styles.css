@@ -652,6 +652,14 @@ body {
   padding: 12px;
   width: 324px;
   z-index: 2;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.feature-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .feature-card h4 {

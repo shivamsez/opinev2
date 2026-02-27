@@ -20,6 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const howParts = document.querySelectorAll('.how-part');
   const sectionFeatures = document.getElementById('sectionFeatures');
   const featuresWrap = document.querySelector('.features-wrap');
+  const featureCards = [
+    document.querySelector('.card-security'),
+    document.querySelector('.card-context'),
+    document.querySelector('.card-honest'),
+    document.querySelector('.card-medium'),
+  ];
+  let featureCardsTriggered = false;
   const btnCtaWaitlist = document.getElementById('btnCtaWaitlist');
   const ctaWaitlistForm = document.getElementById('ctaWaitlistForm');
   const ctaWaitlistInput = document.getElementById('ctaWaitlistInput');
@@ -249,8 +256,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const featuresRect = sectionFeatures.getBoundingClientRect();
     if (featuresRect.top < viewportH * 0.8) {
       featuresWrap.classList.add('visible');
+      if (!featureCardsTriggered) {
+        featureCardsTriggered = true;
+        featureCards.forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), 300 * (i + 1));
+        });
+      }
     } else {
       featuresWrap.classList.remove('visible');
+      if (featureCardsTriggered) {
+        featureCardsTriggered = false;
+        featureCards.forEach(card => card.classList.remove('visible'));
+      }
     }
   }
 
